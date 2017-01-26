@@ -25,11 +25,12 @@ $mail->addAddress (config::MY_ADDRESS);
 $mail->addCC(config::MY_ADDRESS);
 $mail->addReplyTo('replyto@example.com');
 $mail->Subject = 'An email sent from PHP2';
-$mail->Body = '<h1>External image</h1>'
-	.'<img src="https://daveh.io/apple.png"</h2>'
-	."\n"
-	.'<h2>Embedded Image</h2>'
-	.'<img src="cid:banana">';
+$mail->Body = '<h1>External image</h1>
+	<img src="https://daveh.io/apple.png"</h2>
+	
+	<h2>Embedded Image</h2>
+	<img src="cid:banana">  
+';
 
 $mail->addAttachment(dirname(__FILE__) . '/example.txt', 'awesometextfile.txt');
 $mail->AddEmbeddedImage('banana.jpg','banana');
