@@ -1,1 +1,3 @@
-editat local
+sters de aici ceva initial xxx local
+
+editat local rand 3
