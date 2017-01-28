@@ -5,6 +5,20 @@ $mail = new PHPMailer();
 echo get_class($mail);
 echo "<p>Hello World</p></br>";
 
+echo "<script src='https://code.jquery.com/jquery-2.2.3.min.js'></script>";
+echo "<script>
+	$(document).ready(function() {
+		$('#emailForm').on('submit', function(){
+			$('#sendButton').prop('disabled', true);
+			$('#progressImage').show();
+	})
+
+});
+</script>
+";
+
+
+
 //configure PHPMailer with the SMTP Server
 $mail->isSMTP();
 $mail->Host = config::SMTP_HOST;
@@ -45,8 +59,9 @@ $mail->AddEmbeddedImage('banana.jpg','banana');
 
 
 echo isset($_GET['time']) ? $_GET['time'] : '';
-echo "<form action='send.php' method='post'> 
-	<button type='submit'>Send</button>
+echo "<form action='send.php' method='post' id='emailForm'> 
+	<button type='submit' id='sendButton'>Send</button>
+	<img src='loading.gif' width='16' height='16' id='progressImage' class='hidden' />
       </form> 
 
  ";
