@@ -66,11 +66,12 @@ echo "<form action='send.php' method='post' id='emailForm'>
 
  ";
 
-
+/*
 
 if($mail->send()){
-	echo "<br>Mesage sent!";
+	echo "<br>Mesage sent!<br>";
 }
 else {
 }
+*/
 ?>
