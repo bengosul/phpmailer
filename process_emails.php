@@ -4,6 +4,7 @@ if(php_sapi_name()!="cli"){
 echo '<html><body bgcolor="#000000" text="white"><pre>';
 }
 
+require_once 'functions/general_functions.php';
 require_once '../classes/config.php';
 $servername = config::MYSQL_SERVER;
 $username = config::MYSQL_USER;
@@ -16,16 +17,20 @@ $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 } 
-echo "Connected successfully<br>";
+echo "Connected successfully";
+insert_break();
 
 // Check existing rows
 $sql = "SELECT * from emails.processed_emails LIMIT 10";
 $result = $conn->query($sql);
 
+echo "--- printing top 10 existing in db---";
+insert_break();
 while($row = $result->fetch_assoc()) {
 	echo var_dump($row['subject'])."<hr />";
 	//		        echo "id: " . $row["id"]. " Subject: " . $row["subject"]. "<br>";
 }
+insert_break();
 
 /*
    $sql = "TRUNCATE TABLE emails.processed_emails";
@@ -49,8 +54,9 @@ require_once 'inbox_class.php';
 
 $email_object = New Email_reader();
 $inbox_array=$email_object->output();
-
+echo "Found ".count($inbox_array). " new emails"; insert_break();
 foreach ($inbox_array as $email){
+	echo "adding"; insert_break();
 	$subj= $email["index"].$email["header"]->subject;
 	$from_name=  $email["index"].$email["header"]->fromaddress;
 	$from_address = $email['header']->from[0]->mailbox."@".$email['header']->from[0]->host;
@@ -124,7 +130,7 @@ foreach ($inbox_array as $email){
 				}
 
 				echo	"</br>insertid: ".$conn->insert_id;
-				print_r($attachments[$i]);
+//				print_r($attachments[$i]);
 				file_put_contents("/store/".sprintf('%06d',$conn->insert_id)."_".sprintf('%02d',$count)."_".$attachments[$i]['filename'], $attachments[$i]['attachment']);
 				// echo	mkdir("/store/xxx2");	
 			}
