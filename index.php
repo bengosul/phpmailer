@@ -1,6 +1,6 @@
 <?php
 require '../vendor/phpmailer/phpmailer/PHPMailerAutoload.php';
-require '../classes/config.php';
+require '../configs/config.php';
 $mail = new PHPMailer();
 echo get_class($mail);
 echo "<p>Hello World</p></br>";
